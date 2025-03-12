@@ -1,15 +1,35 @@
 import * as fs from "fs";
 
-// Interfaz de almacenamiento genérica
+/**
+ * Interfaz de almacenamiento genérica.
+ */
 interface IStorage {
+  /**
+   * Lee el contenido del almacenamiento.
+   * @returns El contenido leído como una cadena de texto.
+   */
   read(): string;
+  /**
+   * Escribe datos en el almacenamiento.
+   * @param data - Los datos a escribir.
+   */
   write(data: string): void;
 }
 
-// Implementación de almacenamiento en archivos
-class FileStorage implements IStorage {
+/**
+ * Implementación de almacenamiento en archivos.
+ */
+export class FileStorage implements IStorage {
+  /**
+   * Crea una instancia de la clase `FileStorage`.
+   * @param filePath - La ruta del archivo.
+   */
   constructor(private filePath: string) {}
 
+  /**
+   * Lee el contenido del archivo.
+   * @returns El contenido del archivo como una cadena de texto.
+   */
   public read(): string {
     try {
       return fs.readFileSync(this.filePath, "utf-8");
@@ -19,6 +39,10 @@ class FileStorage implements IStorage {
     }
   }
 
+  /**
+   * Escribe datos en el archivo.
+   * @param data - Los datos a escribir.
+   */
   public write(data: string): void {
     try {
       fs.writeFileSync(this.filePath, data, "utf-8");
@@ -29,14 +53,28 @@ class FileStorage implements IStorage {
   }
 }
 
-// Clase independiente que usa almacenamiento externo (cumple DIP)
-class FileManager {
+/**
+ * Clase independiente que usa almacenamiento externo (cumple DIP).
+ */
+export class FileManager {
+  /**
+   * Crea una instancia de la clase `FileManager`.
+   * @param storage - El almacenamiento a utilizar.
+   */
   constructor(private storage: IStorage) {}
 
+  /**
+   * Obtiene el contenido del almacenamiento.
+   * @returns El contenido leído como una cadena de texto.
+   */
   public getContent(): string {
     return this.storage.read();
   }
 
+  /**
+   * Guarda contenido en el almacenamiento.
+   * @param data - Los datos a guardar.
+   */
   public saveContent(data: string): void {
     this.storage.write(data);
   }

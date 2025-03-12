@@ -1,45 +1,62 @@
+/**
+ * Interfaz que representa un objeto imprimible.
+ */
 interface Printable {
-  print(): void
+  /**
+   * Imprime el contenido.
+   */
+  print(): void;
 }
 
+/**
+ * Interfaz que representa un objeto escaneable.
+ */
 interface Scannable {
-  scan(): void
+  /**
+   * Escanea el contenido.
+   */
+  scan(): void;
 }
 
-class Printer implements Printable {
+/**
+ * Clase que implementa la interfaz `Printable` para representar una impresora.
+ */
+export class Printer implements Printable {
+  /**
+   * Imprime el contenido.
+   */
   print(): void {
-    console.log('Printing...')
+    console.log('Printing...');
   }
-
 }
 
-class Scanner implements Scannable {
+/**
+ * Clase que implementa la interfaz `Scannable` para representar un escáner.
+ */
+export class Scanner implements Scannable {
+  /**
+   * Escanea el contenido.
+   */
   scan(): void {
-    console.log('Scanning...')
+    console.log('Scanning...');
   }
 }
 
-class PrinterScanner implements Printable, Scannable {
+/**
+ * Clase que implementa las interfaces `Printable` y `Scannable` para representar una impresora-escáner.
+ */
+export class PrinterScanner implements Printable, Scannable {
+  /**
+   * Imprime el contenido.
+   */
   print(): void {
-    console.log('Printing...')
+    console.log('Printing...');
   }
 
+  /**
+   * Escanea el contenido.
+   */
   scan(): void {
-    console.log('Scanning...')
+    console.log('Scanning...');
   }
 }
-
-// Client code
-const printer = new Printer();
-// Printing
-printer.print();
-
-const scanner = new Scanner();
-// Scanning
-scanner.scan();
-
-const printerScanner = new PrinterScanner();
-// Printing
-printerScanner.print();
-// Scanning
-printerScanner.scan();

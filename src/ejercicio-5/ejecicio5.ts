@@ -1,33 +1,40 @@
-// Class that allows notifications by email to be sent
-class EmailService {
+// Clase abstracta para Notifier, que define la estructura base para las clases hijas
+abstract class Notifier {
+  // Constructor que define qué tipo de servicio de notificación utilizar
+  constructor(protected notificationService: { notify(message: string): void }) {}
+
+  // Método abstracto que será implementado por las clases hijas para enviar notificaciones
+  abstract sendNotification(message: string): void;
+}
+
+// Clase que permite enviar notificaciones por correo electrónico
+export class EmailService {
+  // Método que simula el envío de una notificación por email
   notify(message: string): void {
     console.log(`Sending notification by email: ${message}`);
   }
 }
 
-// Class that allows notifications by SMS to be sent
-class ShortMessageService {
+// Clase que permite enviar notificaciones por SMS
+export class ShortMessageService {
+  // Método que simula el envío de una notificación por SMS
   notify(message: string): void {
     console.log(`Sending notification by SMS: ${message}`);
   }
 }
 
-// Class that makes use of different types of services to perform notifications
-class Notifier {
-  constructor(private notificationService: EmailService | ShortMessageService) {
-  }
-
+// Clase hija de Notifier que implementa el envío de notificaciones por email
+export class EmailNotifier extends Notifier {
+  // Implementación concreta de sendNotification para enviar un correo electrónico
   sendNotification(message: string): void {
     this.notificationService.notify(message);
   }
 }
 
-/**
- * Notifier la haria abstracta y poner dos hijas, una para email y otra para sms 
- */
-// Client code
-const emailNotifier = new Notifier(new EmailService());
-emailNotifier.sendNotification('Hello World!');
-
-const shortMessageNotifier = new Notifier(new ShortMessageService());
-shortMessageNotifier.sendNotification('Hello World!');
+// Clase hija de Notifier que implementa el envío de notificaciones por SMS
+export class SMSNotifier extends Notifier {
+  // Implementación concreta de sendNotification para enviar un SMS
+  sendNotification(message: string): void {
+    this.notificationService.notify(message);
+  }
+}
