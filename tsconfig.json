@@ -3,7 +3,8 @@
     "./tests",
     "./node_modules",
     "./dist",
-    "test"
+    "test",
+    "./docs"
   ],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
